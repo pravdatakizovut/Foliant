@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 @theme inline {
   --font-sans: var(--font-inter);
 }
@@ -10,7 +15,7 @@
   --color-bg-primary: #0b0b0b;
   --color-bg-accent: #0f0c0a;
   --color-bg-input: rgb(255 255 255 / 0.05);
-  --color-bg-secondary: rgb(26 26 32 / 0.4);
+  --color-bg-secondary: #111114;
   --color-text-secondary: #808080;
   --color-text-white: #ffffff;
   --color-border-input: rgb(127 127 127 / 0.3);
@@ -24,11 +29,6 @@
 }
 
 @utility glass-blur {
-  /* background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 210, 120, 0.04)
-  ); */
   backdrop-filter: blur(10px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -38,8 +38,41 @@
   margin-inline: auto;
   padding: 0 24px 0 24px;
 }
+:root {
+  --radius-xl: 0.75rem;
+}
+
 body {
   background: var(--color-bg-primary);
   color: var(--color-text-white);
   font-family: var(--font-inter), sans-serif;
+}
+
+@layer base {
+  input:not([type="submit"]):not([type="button"]):not([type="file"]):not(
+      [type="checkbox"]
+    ):not([type="radio"]),
+  textarea {
+    /* border: 1px solid var(--color-border-input); */
+    background-color: var(--color-bg-secondary);
+    /* border-radius: var(--radius-xl); */
+    color: var(--color-text-white);
+    /* padding: 0.5rem 0.75rem; */
+    transition: border-color 0.15s ease-in-out;
+  }
+
+  input:not([type="submit"]):not([type="button"]):not([type="file"]):not(
+      [type="checkbox"]
+    ):not([type="radio"]):focus,
+  textarea:focus {
+    border-color: #ff9c2b75;
+    outline: none;
+  }
+
+  input:not([type="submit"]):not([type="button"]):not([type="file"]):not(
+      [type="checkbox"]
+    ):not([type="radio"])::placeholder,
+  textarea::placeholder {
+    color: var(--color-text-secondary);
+  }
 }

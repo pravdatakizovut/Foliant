@@ -50,7 +50,7 @@ export default function UserMenu({ user }: UserMenuProps) {
   }, []);
 
   const menuItems = [
-    { icon: UserIcon, label: "Профиль", href: "#" },
+    { icon: UserIcon, label: "Профиль", href: "/profile" },
     { icon: BookOpen, label: "Моя полка", href: "#" },
     { icon: Heart, label: "Избранное", href: "#" },
     { icon: Settings, label: "Настройки", href: "#" },
@@ -88,7 +88,7 @@ export default function UserMenu({ user }: UserMenuProps) {
         onClick={() => setIsOpen((v) => !v)}
         whileTap={{ scale: 0.95 }}
         animate={{ rotate: isOpen ? 0 : 0 }}
-        className="w-10 h-10 rounded-full bg-bg-secondary border-2 border-accent-primary text-accent-primary font-semibold flex items-center justify-center uppercase hover:bg-bg-input transition cursor-pointer"
+        className="w-10 h-10 rounded-full bg-bg-secondary border border-border-input text-accent-primary  flex items-center justify-center uppercase hover:bg-bg-input transition cursor-pointer"
         aria-label="Открыть меню пользователя"
       >
         {initials}
