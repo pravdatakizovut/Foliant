@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Foliant
 
-## Getting Started
+Книжный каталог и личная библиотека на **Next.js 16 App Router** + **React 19** + **Tailwind CSS v4**.
 
-First, run the development server:
+Сейчас это клиентская часть приложения для поиска книг, просмотра детальной информации и будущего управления личными книжными полками. Данные о книгах берутся из [Open Library API](https://openlibrary.org/developers/api), авторизация реализована через **Supabase Auth**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Стек
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 16** (App Router, Turbopack)
+- **React 19**
+- **TypeScript 5**
+- **Tailwind CSS 4**
+- **Supabase** (аутентификация)
+- **Framer Motion** — анимации
+- **Lucide React** — иконки
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Функциональность
 
-To learn more about Next.js, take a look at the following resources:
+| Раздел             | Что работает                                                                       |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| **Главная**        | Hero-баннер + блок «Популярное сейчас» из каталога                                 |
+| **Каталог**        | Поиск по названию, фильтры по жанрам, пагинация. Данные — Open Library             |
+| **Страница книги** | Slug-страница `/book/:id` с обложкой, описанием, метаданными и блоком похожих книг |
+| **Авторизация**    | Регистрация / вход / выход через Supabase. В шапке отображается меню пользователя  |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Текущая стадия
 
-## Deploy on Vercel
+**MVP каталога и авторизации** — базовый поиск и просмотр книг работают, пользователь может войти / зарегистрироваться. Личные полки, избранное и оценки пока ещё не реализованы (заглушки в шапке).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Последние изменения:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- добавлен slug для книг (`/book/[id]`);
+- почищена и декомпозирована страница книги;
+- исправлена ошибка `undefined` в ссылках на книгу.
+
+---
+
+## Роадмап
+
+### Ближайшее (сейчас)
+
+- [ ] **Личная полка** — сохранение книг в «Читаю / Прочитано / Хочу прочитать» в БД Supabase.
+- [ ] **Избранное** — отдельный список избранных книг.
+- [ ] **Профиль пользователя** — страница с аватаром, ником и статистикой.
+
+### Среднесрочное
+
+- [ ] **Собственные рейтинги и отзывы** — оценка и текстовые рецензии на книги.
+- [ ] **Социальные фичи** — подписки на друзей, лента активности.
+- [ ] **Теги / коллекции** — создание кастомных коллекций книг.
+
+### Долгосрочное
+
+- [ ] **Рекомендации** — на основе жанров и прочитанных книг.
+- [ ] **Импорт из внешних сервисов** — Goodreads, StoryGraph.
+- [ ] **Мобильное приложение** — PWA / React Native.
+
+---
