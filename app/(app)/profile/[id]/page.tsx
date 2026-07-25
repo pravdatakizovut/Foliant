@@ -1,7 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
-import { ProfileCard } from "@/components/profile/ProfileCard";
+import { ProfileCard } from "../_components/UserInfo/ProfileCard";
 import { notFound } from "next/navigation";
 import type { Profile } from "@/types/profile";
+import ProgressTracker from "../_components/ProgressTracker/ProgressTracker";
+import StreakTracker from "../_components/StreakTracker/StreakTracker";
 
 interface ProfilePageProps {
   params: Promise<{ id: string }>;
@@ -48,14 +50,18 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   }
 
   return (
-    <div className="foliant-container mt-40 grid grid-cols-12">
-      <ProfileCard
-        profile={profile}
-        currentUser={user}
-        followersCount={followersCount ?? 0}
-        followingCount={followingCount ?? 0}
-        isFollowing={isFollowing}
-      />
+    <div className="foliant-container mt-40 grid grid-cols-12 pb-10">
+      <div className="col-span-4 gap-6 flex flex-col">
+        <ProfileCard
+          profile={profile}
+          currentUser={user}
+          followersCount={followersCount ?? 0}
+          followingCount={followingCount ?? 0}
+          isFollowing={isFollowing}
+        />
+        <ProgressTracker />
+        <StreakTracker />
+      </div>
     </div>
   );
 }

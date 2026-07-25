@@ -4,16 +4,35 @@ import Link from "next/link";
 import { signIn } from "@/app/actions/auth";
 import { Eye, EyeOff } from "lucide-react";
 import { useActionState, useState } from "react";
-
+import Image from "next/image";
+import Button from "@/components/ui/Buttons/Button";
+import { cn } from "@/lib/utils";
+import { Skeleton } from "../_components/Skeleton";
+import { motion } from "framer-motion";
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const [state, formAction, isPending] = useActionState(signIn, null);
 
   return (
-    <div className="w-full max-w-[1000px] border border-border-input border-t-white/40 border-b-white/40 rounded-3xl overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full min-h-[670px]">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="bg-bg-primary/30 backdrop-blur-2xl w-full max-w-250 border border-border-input border-t-white/40 border-b-white/40 rounded-3xl overflow-hidden z-10"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5  h-180">
         <div className="p-5 flex flex-col">
-          <p className="text-3xl mb-5">logo</p>
+          <Link href="/">
+            <Image
+              src="/logo-64x.svg"
+              alt="logotype"
+              width={64}
+              height={64}
+              className="mb-5"
+            />
+          </Link>
+
           <p className="text-3xl mb-5">Войдите в аккаунт</p>
 
           <form action={formAction} className="flex flex-col h-full">
@@ -57,20 +76,24 @@ export default function LoginPage() {
             </div>
 
             {state?.error && (
-              <p className="text-like text-sm text-center mb-3">{state.error}</p>
+              <p className="text-like text-sm text-center mb-3">
+                {state.error}
+              </p>
             )}
 
             <div className="flex flex-col items-center mt-auto">
-              <button
-                type="submit"
+              <Button
                 disabled={isPending}
-                className="px-12 py-3 bg-accent-primary text-white text-lg rounded-full w-fit mb-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                variant="primary"
+                type="submit"
+                className="mb-4 max-w-2/3"
+                fullWidth
               >
                 {isPending ? "Вход..." : "Войти"}
-              </button>
+              </Button>
               <div className="flex gap-2">
-                <p className="text-base">Нет аккаунта?</p>
-                <Link href="/auth/register" className="text-link">
+                <p className="text-base text-text-secondary">Нет аккаунта?</p>
+                <Link href="/auth/register" className="text-white">
                   Зарегистрироваться
                 </Link>
               </div>
@@ -78,17 +101,24 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <div className="hidden md:block relative">
+        <div className="hidden md:block relative bg-bg-secondary">
+          {!videoLoaded && (
+            <Skeleton className="absolute inset-0 rounded-none" />
+          )}
           <video
             src="/auth-video.mp4"
             autoPlay
             muted
             loop
             playsInline
-            className="object-cover w-full h-full"
+            onLoadedData={() => setVideoLoaded(true)}
+            className={cn(
+              "object-cover w-full h-full transition-opacity duration-500",
+              videoLoaded ? "opacity-100" : "opacity-0",
+            )}
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

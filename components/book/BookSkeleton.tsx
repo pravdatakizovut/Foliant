@@ -1,6 +1,6 @@
 export function BookSkeleton() {
   return (
-    <main className="min-h-screen bg-[#0A0A0F] text-white py-24 px-6">
+    <main className="min-h-screen bg-[#0A0A0F] text-white pt-54  ">
       <div className="foliant-container animate-pulse">
         <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12">
           <div className="aspect-2/3 bg-[#1A1A1F] rounded-xl" />

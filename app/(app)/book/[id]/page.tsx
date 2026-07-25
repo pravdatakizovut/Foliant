@@ -32,7 +32,7 @@ export default function BookPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0A0A0F] text-white foliant-container pt-40 pb-10">
+    <main className="min-h-screen bg-[#0A0A0F] text-white  pt-40 pb-10">
       <div className="foliant-container">
         <BackLink />
         <BookDetails book={book} />

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { followUser, unfollowUser } from "@/app/actions/follow";
+import Button from "@/components/ui/Buttons/Button";
 
 interface SubscribeButtonProps {
   userId: string;
@@ -29,17 +30,15 @@ export function SubscribeButton({ userId, initialIsFollowing }: SubscribeButtonP
   }
 
   return (
-    <button
+    <Button
       type="button"
+      variant={isFollowing ? "outline" : "primary"}
+      size="md"
+      isLoading={isPending}
       onClick={handleClick}
-      disabled={isPending}
-      className="px-8 py-2.5 rounded-full bg-accent-primary text-white hover:bg-accent-primary/80 disabled:opacity-50 disabled:cursor-not-allowed transition"
+      className="rounded-full px-8"
     >
-      {isPending
-        ? "Загрузка..."
-        : isFollowing
-        ? "Отписаться"
-        : "Подписаться"}
-    </button>
+      {isFollowing ? "Отписаться" : "Подписаться"}
+    </Button>
   );
 }

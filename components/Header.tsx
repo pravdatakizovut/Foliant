@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { createClient } from "@/lib/supabase/server";
 import UserMenu from "@/components/auth/UserMenu";
+import Image from "next/image";
 
 async function Header() {
   const supabase = await createClient();
@@ -12,9 +13,9 @@ async function Header() {
   return (
     <header className="fixed top-5 left-0 z-10 w-full">
       <div className="flex justify-between items-center foliant-container border border-border-input py-3 px-6 rounded-full glass-blur">
-        <div className="flex gap-2 flex-1">
-          <p>Icon</p>
-          <p>Logo</p>
+        <div className="flex gap-2 flex-1 items-center">
+          <Image src="/logo-64x.svg" alt="logotype" width={32} height={32} />
+          <span className="font-light ">Foliant</span>
         </div>
         <nav className="flex gap-8 flex-1 justify-center text-base font-light">
           <Link href="/">Главная</Link>

@@ -4,6 +4,11 @@ import Link from "next/link";
 import { signUp } from "@/app/actions/auth";
 import { Check, Eye, EyeOff } from "lucide-react";
 import { useActionState, useState } from "react";
+import Image from "next/image";
+import Button from "@/components/ui/Buttons/Button";
+import { cn } from "@/lib/utils";
+import { Skeleton } from "../_components/Skeleton";
+import { motion } from "framer-motion";
 
 function Checkbox({
   label,
@@ -28,13 +33,27 @@ function Checkbox({
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const [state, formAction, isPending] = useActionState(signUp, null);
 
   return (
-    <div className="w-full max-w-[1000px] border border-border-input border-t-white/40 border-b-white/40 rounded-3xl overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full min-h-[670px]">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="bg-bg-primary/30 backdrop-blur-2xl  w-full max-w-250 border border-border-input border-t-white/40 border-b-white/40 rounded-3xl overflow-hidden z-10"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 h-180">
         <div className="p-5 flex flex-col">
-          <p className="text-3xl mb-5">logo</p>
+          <Link href="/">
+            <Image
+              src="/logo-64x.svg"
+              alt="logotype"
+              width={64}
+              height={64}
+              className="mb-5"
+            />
+          </Link>
           <p className="text-3xl mb-5">Создайте аккаунт</p>
 
           <form action={formAction} className="flex flex-col h-full">
@@ -128,17 +147,22 @@ export default function RegisterPage() {
               </p>
             )}
 
-            <div className="flex flex-col items-center mt-auto">
-              <button
+            <div className="flex flex-col items-center mt-auto ">
+              <Button
+                variant="primary"
                 type="submit"
+                fullWidth
+                className="mb-4 max-w-2/3 "
                 disabled={isPending}
-                className="px-12 py-3 bg-accent-primary text-white text-lg rounded-full w-fit mb-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent-primary/75 cursor-pointer"
               >
-                {isPending ? "Регистрация..." : "Зарегистрироваться"}
-              </button>
+                {isPending ? "Загрузка..." : "Зарегистрироваться"}
+              </Button>
+
               <div className="flex gap-2">
-                <p className="text-base">Уже есть аккаунт?</p>
-                <Link href="/auth/login" className="text-link">
+                <p className="text-base text-text-secondary">
+                  Уже есть аккаунт?
+                </p>
+                <Link href="/auth/login" className="text-white">
                   Войти
                 </Link>
               </div>
@@ -146,17 +170,24 @@ export default function RegisterPage() {
           </form>
         </div>
 
-        <div className="hidden md:block relative">
+        <div className="hidden md:block relative bg-bg-secondary">
+          {!videoLoaded && (
+            <Skeleton className="absolute inset-0 rounded-none" />
+          )}
           <video
             src="/auth-video.mp4"
             autoPlay
             muted
             loop
             playsInline
-            className="object-cover w-full h-full"
+            onLoadedData={() => setVideoLoaded(true)}
+            className={cn(
+              "object-cover w-full h-full transition-opacity duration-500",
+              videoLoaded ? "opacity-100" : "opacity-0",
+            )}
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
