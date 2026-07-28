@@ -24,7 +24,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-accent-primary text-white hover:bg-accent-primary/90 focus:ring-accent-primary/50",
   secondary:
-    "bg-bg-secondary text-white hover:bg-bg-secondary/80 focus:ring-secondary-stroke",
+    "bg-bg-secondary border-white/75 border text-white hover:border-white focus:ring-secondary-stroke",
   outline:
     "bg-transparent border border-accent-primary text-white hover:bg-accent-primary focus:ring-secondary-stroke",
   ghost:
@@ -55,10 +55,10 @@ function Button(
       type={type}
       disabled={isDisabled}
       className={[
-        "inline-flex items-center justify-center rounded-full font-medium transition",
+        "inline-flex items-center justify-center rounded-full font-medium transition group",
         "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-bg-primary",
         "disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer",
-        "px-6 py-3",
+        "px-6 py-3 gap-2",
         variantStyles[variant],
         fullWidth ? "w-full" : "",
         className,
@@ -91,7 +91,11 @@ function Button(
 
       {!isLoading && leftIcon}
       {children}
-      {!isLoading && rightIcon}
+      {!isLoading && rightIcon && (
+        <span className="transition-transform duration-200 ease-in-out group-hover:translate-x-1">
+          {rightIcon}
+        </span>
+      )}
     </button>
   );
 }

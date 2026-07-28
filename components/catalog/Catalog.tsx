@@ -8,6 +8,7 @@ import { BookCard } from "./BookCard";
 import { BookCardSkeleton } from "./BookCardSkeleton";
 import { Pagination } from "./Pagination";
 import type { Genre } from "./GenreFilter";
+import Image from "next/image";
 
 const genres: Genre[] = [
   { label: "Все" },
@@ -55,7 +56,32 @@ export function Catalog({
   }
 
   return (
-    <div className="min-h-screen foliant-container bg-[#0A0A0F] text-white   ">
+    <div className="min-h-screen   text-white  mb-10 ">
+      <Image
+        src="/catalog_dc.png"
+        width={990}
+        height={931}
+        alt="bg "
+        className="absolute inset-0 -z-1"
+        draggable={false}
+      />
+
+      <Image
+        src="/catalog_dc2.png"
+        width={1558}
+        height={1467}
+        alt="bg "
+        className="absolute right-0 -z-1"
+        draggable={false}
+      />
+      <Image
+        src="/catalog_dc3.png"
+        width={1979.5}
+        height={168}
+        alt="bg"
+        className="absolute inset-0 -z-1"
+        draggable={false}
+      />
       {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
 
       {showSearch && (

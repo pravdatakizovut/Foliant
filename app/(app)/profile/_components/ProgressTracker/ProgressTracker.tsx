@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 function ProgressTracker() {
   const currentYear = new Date().getFullYear();
@@ -8,15 +11,30 @@ function ProgressTracker() {
   const ahead = 2;
 
   return (
-    <div className="col-span-4 border border-border-input rounded-3xl p-5 bg-bg-secondary flex flex-col gap-4">
-      <h2 className="text-xl font-semibold text-white">Цель на {currentYear} год</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 400, // жёсткость пружины
+        damping: 20, // затухание: чем меньше — тем больше раскачка
+        mass: 1, // масса: чем больше — тем инертнее
+        delay: 0.2,
+      }}
+      className="col-span-4 border border-border-input rounded-3xl p-5 bg-bg-secondary flex flex-col gap-4"
+    >
+      <h2 className="text-xl font-semibold text-white">
+        Цель на {currentYear} год
+      </h2>
 
       <div className="flex items-end justify-between gap-4">
         <div className="flex items-baseline gap-1.5">
           <span className="text-3xl font-bold text-accent-primary">{read}</span>
           <span className="text-lg text-white/60">из</span>
           <span className="text-3xl font-bold text-accent-primary">{goal}</span>
-          <span className="text-sm text-text-secondary uppercase tracking-wide ml-1">книг</span>
+          <span className="text-sm text-text-secondary uppercase tracking-wide ml-1">
+            книг
+          </span>
         </div>
         <span className="text-2xl font-semibold text-white">{percentage}%</span>
       </div>
@@ -31,7 +49,7 @@ function ProgressTracker() {
       <p className="text-sm text-text-secondary">
         Вы опережаете график на {ahead} книги! Так держать.
       </p>
-    </div>
+    </motion.div>
   );
 }
 

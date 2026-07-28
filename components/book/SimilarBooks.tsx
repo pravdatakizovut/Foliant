@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Book } from "@/types/book";
 import { BookCard } from "@/components/catalog/BookCard";
+import { SimilarBooksSkeleton } from "./SimilarBooksSkeleton";
 
 interface SimilarBooksProps {
   books: Book[];
@@ -8,7 +9,11 @@ interface SimilarBooksProps {
 }
 
 export function SimilarBooks({ books, loading }: SimilarBooksProps) {
-  if (books.length === 0 && !loading) return null;
+  if (loading) {
+    return <SimilarBooksSkeleton />;
+  }
+
+  if (books.length === 0) return null;
 
   return (
     <section className="mt-20">
@@ -22,22 +27,11 @@ export function SimilarBooks({ books, loading }: SimilarBooksProps) {
         </Link>
       </div>
 
-      {loading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className="aspect-2/3 bg-[#1A1A1F] rounded-xl animate-pulse"
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {books.map((book, index) => (
-            <BookCard key={`${book.key}-${index}`} book={book} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {books.map((book, index) => (
+          <BookCard key={`${book.key}-${index}`} book={book} />
+        ))}
+      </div>
     </section>
   );
 }

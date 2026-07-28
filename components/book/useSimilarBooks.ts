@@ -11,6 +11,7 @@ interface UseSimilarBooksResult {
 export function useSimilarBooks(
   subject?: string,
   currentKey?: string,
+  count = 8,
 ): UseSimilarBooksResult {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,7 @@ export function useSimilarBooks(
       try {
         setLoading(true);
         const res = await fetch(
-          `/api/search?subject=${encodeURIComponent(searchSubject)}&limit=5`,
+          `/api/search?subject=${encodeURIComponent(searchSubject)}&limit=${count + 1}`,
         );
         if (!res.ok) throw new Error("Ошибка");
         const data = await res.json();
@@ -33,7 +34,7 @@ export function useSimilarBooks(
           const filtered = (data.books as Book[]).filter(
             (b) => b.key !== currentKey,
           );
-          setBooks(filtered.slice(0, 4));
+          setBooks(filtered.slice(0, count));
         }
       } catch {
         // игнорируем ошибки похожих книг
@@ -47,7 +48,7 @@ export function useSimilarBooks(
     return () => {
       cancelled = true;
     };
-  }, [subject, currentKey]);
+  }, [subject, currentKey, count]);
 
   return { books, loading };
 }

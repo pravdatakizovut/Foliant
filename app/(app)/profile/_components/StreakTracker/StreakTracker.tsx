@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import { Flame } from "lucide-react";
+import { motion } from "framer-motion";
 
 function StreakTracker() {
   const streak = 14;
@@ -13,7 +15,18 @@ function StreakTracker() {
   ];
 
   return (
-    <div className="col-span-4 border border-border-input rounded-3xl p-5 bg-bg-secondary flex flex-col gap-5">
+    <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 400, // жёсткость пружины
+        damping: 20, // затухание: чем меньше — тем больше раскачка
+        mass: 1, // масса: чем больше — тем инертнее
+        delay: 0.4,
+      }}
+      className="col-span-4 border border-border-input rounded-3xl p-5 bg-bg-secondary flex flex-col gap-5"
+    >
       <h2 className="text-xl font-semibold text-white">Ударный режим</h2>
 
       <div className="flex items-center gap-4">
@@ -47,7 +60,7 @@ function StreakTracker() {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
