@@ -7,6 +7,7 @@ import Image from "next/image";
 export default function HomePage() {
   return (
     <main className="relative">
+      {/* streak */}
       <section className=" h-228 w-full mb-8">
         {/* <Image src="/bg-home.jpg" alt="qwe" fill className="object-cover" /> */}
         <div className="flex justify-center items-center h-screen">
