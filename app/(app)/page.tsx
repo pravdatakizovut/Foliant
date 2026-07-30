@@ -1,8 +1,9 @@
-import { Catalog } from "@/components/catalog/Catalog";
+import { Catalog } from "@/app/(app)/catalog/_components/Catalog";
 import Button from "@/components/ui/Buttons/Button";
 import { MoveRight } from "lucide-react";
 
 import Image from "next/image";
+import { ReaderPath } from "./_components/ReaderPath";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,8 @@ export default function HomePage() {
           <span className="text-6xl text-center text-accent-primary">?</span>
         </div>
       </section>
-      <section className="foliant-container">
+      {/* Catalog Section */}
+      {/* <section className="foliant-container mb-30">
         <Catalog
           title="Популярное сейчас"
           showSearch={true}
@@ -32,6 +34,11 @@ export default function HomePage() {
             Смотреть всё
           </Button>
         </div>
+      </section> */}
+      {/* RoadReader Section */}
+      <section className="foliant-container">
+        <ReaderPath />
+        {/* </div> */}
       </section>
     </main>
   );

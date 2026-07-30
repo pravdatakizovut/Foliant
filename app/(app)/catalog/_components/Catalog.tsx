@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useCatalog } from "./useCatalog";
-import { SearchInput } from "./SearchInput";
-import { GenreFilter } from "./GenreFilter";
-import { BookCard } from "./BookCard";
-import { BookCardSkeleton } from "./BookCardSkeleton";
-import { Pagination } from "./Pagination";
-import type { Genre } from "./GenreFilter";
+import { useCatalog } from "../../../../components/catalog/useCatalog";
+import { SearchInput } from "../../../../components/catalog/SearchInput";
+import { GenreFilter } from "../../../../components/catalog/GenreFilter";
+import { BookCard } from "../../../../components/catalog/BookCard";
+import { BookCardSkeleton } from "../../../../components/catalog/BookCardSkeleton";
+import { Pagination } from "../../../../components/catalog/Pagination";
+import type { Genre } from "../../../../components/catalog/GenreFilter";
 import Image from "next/image";
 
 const genres: Genre[] = [
@@ -56,12 +56,12 @@ export function Catalog({
   }
 
   return (
-    <div className="min-h-screen   text-white  mb-10 ">
+    <div className="min-h-screen   text-white  mb-10 foliant-container">
       <Image
         src="/catalog_dc.png"
         width={990}
         height={931}
-        alt="bg "
+        alt="bg"
         className="absolute inset-0 -z-1"
         draggable={false}
       />
@@ -97,7 +97,7 @@ export function Catalog({
 
       {/* Сетка книг */}
       {loading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ">
           {Array.from({ length: limit }).map((_, i) => (
             <BookCardSkeleton key={`skeleton-${i}`} />
           ))}
