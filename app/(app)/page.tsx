@@ -16,7 +16,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Catalog Section */}
-      {/* <section className="foliant-container mb-30">
+      <section className="foliant-container mb-30">
         <Catalog
           title="Популярное сейчас"
           showSearch={true}
@@ -34,11 +34,36 @@ export default function HomePage() {
             Смотреть всё
           </Button>
         </div>
-      </section> */}
+      </section>
       {/* RoadReader Section */}
-      <section className="foliant-container">
+      <section className="foliant-container mb-30">
         <ReaderPath />
         {/* </div> */}
+      </section>
+      <section className="foliant-container pb-50">
+        <div className="grid grid-cols-4 h-160 gap-6">
+          <div className="flex flex-col col-span-2 justify-between items-start">
+            <div className="flex flex-col gap-6 ">
+              <p className="text-[32px] font-semibold">
+                Всё для вашего читательского пути
+              </p>
+              <p className="text-xl font-light leading-1.4 text-text-secondary">
+                Читайте больше, запоминайте лучшее и делитесь открытиями с
+                друзьями. Мы создали удобные инструменты, которые сделают каждую
+                книгу незабываемой.
+              </p>
+            </div>
+            <div className="flex flex-col gap-6 items-end   ml-auto">
+              <p className="text-2xl ">📖 Отслеживай прогресс</p>
+              <p className="text-xl font-light leading-1.4 text-text-secondary text-end">
+                Читайте больше, запоминайте лучшее и делитесь открытиями с
+                друзьями. Мы создали удобные инструменты, которые сделают каждую
+                книгу незабываемой.
+              </p>
+            </div>
+          </div>
+          <div className="col-span-2 bg-text-secondary/15 h-full w-full rounded-3xl"></div>
+        </div>
       </section>
     </main>
   );
