@@ -10,7 +10,7 @@ import UserMenu from "@/components/auth/UserMenu";
 import { signOut } from "@/app/actions/auth";
 
 interface HeaderClientProps {
-  user: User | null;
+  user: User | null | undefined;
 }
 
 const navLinks = [
@@ -29,10 +29,11 @@ export default function HeaderClient({ user }: HeaderClientProps) {
         initial={{ maxWidth: "1720px" }}
         animate={{ maxWidth: "1440px" }}
         transition={{
-          delay: 1.5,
           type: "spring",
-          stiffness: 120,
-          damping: 14,
+          stiffness: 400, // жёсткость пружины
+          damping: 15, // затухание: чем меньше — тем больше раскачка
+          mass: 1, // масса: чем больше — тем инертнее
+          delay: 0,
         }}
         className="  w-full fixed  left-1/2 -translate-x-1/2 mx-auto top-5 z-10 backdrop-blur-xl rounded-full "
       >
@@ -80,7 +81,12 @@ export default function HeaderClient({ user }: HeaderClientProps) {
               <Menu className="w-6 h-6" />
             </button>
 
-            {user ? (
+            {user === undefined ? (
+              <div className="hidden md:flex gap-2.5 items-center">
+                <div className="w-[116px] h-10 rounded-full bg-white/5 animate-pulse" />
+                <div className="w-[76px] h-10 rounded-full bg-white/5 animate-pulse" />
+              </div>
+            ) : user ? (
               <div className="hidden md:block">
                 <UserMenu user={user} />
               </div>

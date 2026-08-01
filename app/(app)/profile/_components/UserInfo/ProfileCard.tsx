@@ -32,7 +32,7 @@ export function ProfileCard({
         mass: 1, // масса: чем больше — тем инертнее
         delay: 0,
       }}
-      className="max-h-62.5 col-span-4 border border-border-input rounded-3xl p-5 bg-bg-secondary"
+      className="max-h-62.5 col-span-4 background-block  p-5 "
     >
       {isEditing ? (
         <ProfileEditForm

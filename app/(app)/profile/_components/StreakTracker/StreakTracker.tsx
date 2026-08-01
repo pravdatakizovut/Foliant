@@ -25,7 +25,7 @@ function StreakTracker() {
         mass: 1, // масса: чем больше — тем инертнее
         delay: 0.4,
       }}
-      className="col-span-4 border border-border-input rounded-3xl p-5 bg-bg-secondary flex flex-col gap-5"
+      className="col-span-4 border  background-block p-5  flex flex-col gap-5"
     >
       <h2 className="text-xl font-semibold text-white">Ударный режим</h2>
 

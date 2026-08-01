@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Profile } from "@/types/profile";
 import ProgressTracker from "../_components/ProgressTracker/ProgressTracker";
 import StreakTracker from "../_components/StreakTracker/StreakTracker";
+import UserStatistics from "../_components/UserStatistics/UserStatistics";
 
 interface ProfilePageProps {
   params: Promise<{ id: string }>;
@@ -50,7 +51,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   }
 
   return (
-    <div className="foliant-container mt-40 grid grid-cols-12 pb-10">
+    <div className="foliant-container mt-40 grid grid-cols-12 pb-10 gap-8">
       <div className="col-span-4 gap-6 flex flex-col">
         <ProfileCard
           profile={profile}
@@ -61,6 +62,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         />
         <ProgressTracker />
         <StreakTracker />
+      </div>
+      <div className="col-span-8 flex gap-4 h-25">
+        <UserStatistics />
       </div>
     </div>
   );
