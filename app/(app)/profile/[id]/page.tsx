@@ -9,7 +9,7 @@ import UserStatistics from "../_components/UserStatistics/UserStatistics";
 interface ProfilePageProps {
   params: Promise<{ id: string }>;
 }
-
+// str fixed
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const { id } = await params;
   const supabase = await createClient();
