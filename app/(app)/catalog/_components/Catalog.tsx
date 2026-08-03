@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useCatalog } from "../../../../components/catalog/useCatalog";
 import { SearchInput } from "../../../../components/catalog/SearchInput";
 import { GenreFilter } from "../../../../components/catalog/GenreFilter";
@@ -19,6 +20,21 @@ const genres: Genre[] = [
   { label: "Роман", value: "romance" },
   { label: "Поэзия", value: "poetry" },
 ];
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
 
 interface CatalogProps {
   title?: string;
@@ -58,23 +74,6 @@ export function Catalog({
   return (
     <div className="min-h-screen   text-white  mb-10 foliant-container">
       <Image
-        src="/catalog_dc.png"
-        width={990}
-        height={931}
-        alt="bg"
-        className="absolute inset-0 -z-1"
-        draggable={false}
-      />
-
-      <Image
-        src="/catalog_dc2.png"
-        width={1558}
-        height={1467}
-        alt="bg "
-        className="absolute right-0 -z-1"
-        draggable={false}
-      />
-      <Image
         src="/catalog_dc3.png"
         width={1979.5}
         height={168}
@@ -107,11 +106,19 @@ export function Catalog({
       ) : books.length === 0 ? (
         <div className="text-center py-20 text-[#8A8A8F]">Книги не найдены</div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <motion.div
+          key={`${page}-${genre ?? "all"}-${query}`}
+          variants={gridVariants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
           {books.map((book, index) => (
-            <BookCard key={`${book.key}-${index}`} book={book} />
+            <motion.div key={`${book.key}-${index}`} variants={itemVariants}>
+              <BookCard book={book} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
 
       {showPagination && (

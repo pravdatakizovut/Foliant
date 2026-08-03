@@ -20,10 +20,10 @@ function UserStatistics() {
         mass: 1, // масса: чем больше — тем инертнее
         delay: 0.1,
       }}
-      className="flex gap-3 flex-1"
+      className="flex gap-3  h-fit"
     >
       {/* Подписчиков */}
-      <div className="flex flex-col background-block flex-1 rounded-xl p-4">
+      <div className="flex flex-col background-block flex-1 rounded-xl p-4 ">
         <div className="flex justify-between">
           <p className="text-text-secondary font-bold text-[28px]">0</p>
           <Users color="#8A8A8F" />

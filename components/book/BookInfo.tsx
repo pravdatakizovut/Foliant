@@ -66,7 +66,7 @@ export function BookInfo({ book }: BookInfoProps) {
         ))}
       </div>
 
-      <BookActions />
+      <BookActions book={book} />
     </div>
   );
 }
